@@ -12,10 +12,10 @@ export default function App() {
       path: "/",
       element: <RootLayout />,
       children: [
-        { index: true, path: "/home", element: <Home /> },
-        { index: true, path: "/gallery", element: <Gallery /> },
-        { index: true, path: "/about", element: <About /> },
-        { index: true, path: "/contact", element: <Contact /> }
+        { index: true, path: "", element: <Home /> },
+        { index: true, path: "gallery", element: <Gallery /> },
+        { index: true, path: "about", element: <About /> },
+        { index: true, path: "contact", element: <Contact /> }
       ]
     }
   ]);
