@@ -1,0 +1,157 @@
+/* Footer container */
+.footer {
+  width: 100%;
+  padding: 30px 0 20px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.footerContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Horizontal divider */
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+/* Main content section */
+.footerContent {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 15px;
+}
+
+/* Copyright text */
+.copyright {
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+/* Contact section */
+.contact {
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.contact a {
+  color: rgba(0, 0, 0, 0.8);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.contact a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: #000000;
+  transition: width 0.3s ease;
+}
+
+.contact a:hover {
+  color: #000000;
+}
+
+.contact a:hover::after {
+  width: 100%;
+}
+
+/* Social icons */
+.socials {
+  display: flex;
+  gap: 20px;
+}
+
+.socialLink {
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.socialLink:hover {
+  color: #ff0000;
+  transform: translateY(-3px);
+}
+
+/* Credits section */
+.credits {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  margin-top: 10px;
+}
+
+.creditLink {
+  color: rgba(0, 0, 0, 0.7);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.creditLink::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: #000000;
+  transition: width 0.3s ease;
+}
+
+.creditLink:hover {
+  color: #ff0000;
+}
+
+.creditLink:hover::after {
+  width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .footerContent {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+  
+  .socials {
+    margin-top: 5px;
+    background-color: #6b2121;
+  }
+}
+
+/* Optional animation for visibility */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.footer {
+  animation: fadeIn 0.8s ease forwards;
+}

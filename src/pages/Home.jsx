@@ -1,9 +1,11 @@
-import 
+import HeroSection from "../components/homePageComponents/HeroSection";
+import HomeGallery from "../components/homePageComponents/HomeGallery";
+import styles from './Home.module.css'
 export default function Home() {
   return (
-    <>
-      <h1>Khy Rodriguez</h1>
-      <p>Filmmaker | Photographer</p>
-    </>
+    <div className={styles.container}>
+      <HeroSection />
+      <HomeGallery />
+    </div>
   );
 }
