@@ -54,7 +54,7 @@ export default function HomeGallery() {
   ];
 
   return (
-    <div className={styles.gallery}>
+    <div className={styles.gallery} >
       {galleryItems.map((item) => (
         <div key={item.id} className={item.className}>
           <div className={styles.imageContainer}>

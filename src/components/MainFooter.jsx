@@ -1,40 +1,95 @@
-import React from 'react';
-import { FaInstagram, FaTiktok, FaYoutube, FaTwitter } from 'react-icons/fa';
-import styles from './MainFooter.module.css';
+import React, { useState, useEffect } from "react";
+import { FaInstagram, FaTiktok, FaYoutube, FaTwitter } from "react-icons/fa";
+import styles from "./MainFooter.module.css";
 
 const MainFooter = () => {
+  const [hover, setHover] = useState("");
+  const [year, setYear] = useState(new Date().getFullYear());
+
+  // Update year automatically
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setYear(new Date().getFullYear());
+    }, 60000 * 60 * 24); // Check once per day
+    return () => clearInterval(interval);
+  }, []);
+
+  const socialLinks = [
+    {
+      icon: <FaInstagram />,
+      href: "https://instagram.com/",
+      name: "instagram"
+    },
+    { icon: <FaTiktok />, href: "https://tiktok.com/", name: "tiktok" },
+    { icon: <FaYoutube />, href: "https://youtube.com/", name: "youtube" },
+    { icon: <FaTwitter />, href: "https://twitter.com/", name: "twitter" }
+  ];
+
   return (
     <footer className={styles.footer}>
+      <div className={styles.gradientDivider}></div>
+
       <div className={styles.footerContainer}>
-        <div className={styles.divider}></div>
-        
         <div className={styles.footerContent}>
           <div className={styles.copyright}>
-            Copyright © 2018—{new Date().getFullYear()} Khy Rodriguez. All Rights Reserved
+            <span className={styles.copyrightSymbol}>©</span> {year} Khy
+            Rodriguez
           </div>
-          
-          <div className={styles.contact}>
-            Contact: <a href="mailto:placeholder@example.com">placeholder@example.com</a>
+
+          <div className={`${styles.contact} ${styles.pulseAnimation}`}>
+            <span>Contact:</span>
+            <a
+              href="mailto:placeholder@example.com"
+              className={styles.emailLink}
+              onMouseEnter={() => setHover("email")}
+              onMouseLeave={() => setHover("")}
+            >
+              placeholder@example.com
+              <span
+                className={`${styles.underline} ${
+                  hover === "email" ? styles.active : ""
+                }`}
+              ></span>
+            </a>
           </div>
-          
+
           <div className={styles.socials}>
-            <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
-              <FaInstagram />
-            </a>
-            <a href="https://tiktok.com/" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
-              <FaTiktok />
-            </a>
-            <a href="https://youtube.com/" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
-              <FaYoutube />
-            </a>
-            <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
-              <FaTwitter />
-            </a>
+            {socialLinks.map((social) => (
+              <a
+                key={social.name}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.socialLink}
+                onMouseEnter={() => setHover(social.name)}
+                onMouseLeave={() => setHover("")}
+              >
+                <div
+                  className={`${styles.iconContainer} ${
+                    hover === social.name ? styles.hover : ""
+                  }`}
+                >
+                  {social.icon}
+                </div>
+              </a>
+            ))}
           </div>
         </div>
-        
+
         <div className={styles.credits}>
-          Designed by <a href="https://example.com" className={styles.creditLink}>AP</a>
+          <a
+            href="https://example.com"
+            className={styles.creditLink}
+            onMouseEnter={() => setHover("credit")}
+            onMouseLeave={() => setHover("")}
+          >
+            Designed By: AP
+            <span
+              className={`${styles.underline} ${
+                hover === "credit" ? styles.active : ""
+              }`}
+            ></span>
+          </a>
         </div>
       </div>
     </footer>

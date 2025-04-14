@@ -1,108 +1,176 @@
-/* Footer container */
+/* Main footer styles */
 .footer {
   width: 100%;
-  padding: 30px 0 20px;
+  padding: 40px 0 30px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   position: relative;
+  background-color: #0f0f0f;
+  overflow: hidden;
+}
+
+/* Animated gradient divider */
+.gradientDivider {
+  width: 100%;
+  height: 3px;
+  margin-bottom: 30px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: gradientFlow 12s linear infinite;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .footerContainer {
-  width: 100%;
+  width: 90%;
+  max-width: 1200px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Horizontal divider */
-.divider {
-  width: 100%;
-  height: 1px;
-  background-color: rgba(0, 0, 0, 0.2);
-  margin-bottom: 20px;
-}
-
-/* Main content section */
 .footerContent {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  gap: 15px;
-}
-
-/* Copyright text */
-.copyright {
-  color: rgba(0, 0, 0, 0.7);
-  font-size: 14px;
-  letter-spacing: 0.5px;
-}
-
-/* Contact section */
-.contact {
-  color: rgba(0, 0, 0, 0.7);
-  font-size: 14px;
-  letter-spacing: 0.5px;
-}
-
-.contact a {
-  color: rgba(0, 0, 0, 0.8);
-  text-decoration: none;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.contact a::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 1px;
-  bottom: -2px;
-  left: 0;
-  background-color: #000000;
-  transition: width 0.3s ease;
-}
-
-.contact a:hover {
-  color: #000000;
-}
-
-.contact a:hover::after {
-  width: 100%;
-}
-
-/* Social icons */
-.socials {
-  display: flex;
+  margin-bottom: 30px;
   gap: 20px;
 }
 
-.socialLink {
-  color: rgba(255, 255, 255, 0.7);
+/* Copyright section with hover effect */
+.copyright {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+  letter-spacing: 0.8px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
   transition: all 0.3s ease;
+}
+
+.copyrightSymbol {
+  margin-right: 5px;
   font-size: 18px;
+  opacity: 0.9;
+  color: #ffffff;
+}
+
+.copyright:hover {
+  transform: translateY(-2px);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+/* Contact section with pulse animation */
+.pulseAnimation {
+  animation: subtlePulse 5s infinite ease-in-out;
+}
+
+@keyframes subtlePulse {
+  0% { opacity: 0.9; }
+  50% { opacity: 1; }
+  100% { opacity: 0.9; }
+}
+
+.contact {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.emailLink {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  transition: all 0.4s ease;
+  padding: 2px 4px;
+}
+
+.emailLink:hover {
+  color: #ffffff;
+  letter-spacing: 0.8px;
+}
+
+/* Animated underline for links */
+.underline {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #100f0f, #9a8888);
+  transition: width 0.4s ease;
+}
+
+.underline.active {
+  width: 100%;
+}
+
+/* Social media links section */
+.socials {
+  display: flex;
+  gap: 15px;
+}
+
+.socialLink {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+}
+
+.iconContainer {
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  font-size: 18px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
 }
 
-.socialLink:hover {
+.iconContainer:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #ffffff, #000000);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.4s ease;
+}
+
+.iconContainer:hover, .iconContainer.hover {
   color: #ff0000;
-  transform: translateY(-3px);
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
-
-/* Credits section */
 .credits {
-  color: rgba(0, 0, 0, 0.5);
+  color: rgb(255, 255, 255);
   font-size: 12px;
   letter-spacing: 0.5px;
   margin-top: 10px;
 }
 
 .creditLink {
-  color: rgba(0, 0, 0, 0.7);
+  color: rgb(255, 0, 0);
   text-decoration: none;
   transition: all 0.3s ease;
   position: relative;
@@ -120,38 +188,9 @@
 }
 
 .creditLink:hover {
-  color: #ff0000;
+  color: #ffffff;
 }
 
 .creditLink:hover::after {
   width: 100%;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .footerContent {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 20px;
-  }
-  
-  .socials {
-    margin-top: 5px;
-    background-color: #6b2121;
-  }
-}
-
-/* Optional animation for visibility */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.footer {
-  animation: fadeIn 0.8s ease forwards;
 }
