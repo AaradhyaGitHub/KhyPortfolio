@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { GALLERY } from "../../data/gallery";
-import classes from "./GenreGrid.module.css";
+import classes from "./genreGrid.module.css";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
