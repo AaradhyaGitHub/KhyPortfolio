@@ -5,6 +5,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Gallery from "./pages/Gallery";
 import Home from "./pages/Home";
+import GenreGrid from "./components/galleryComponents/genreGrid";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -13,9 +14,13 @@ export default function App() {
       element: <RootLayout />,
       children: [
         { index: true, path: "", element: <Home /> },
-        { index: true, path: "gallery", element: <Gallery /> },
-        { index: true, path: "about", element: <About /> },
-        { index: true, path: "contact", element: <Contact /> }
+        {
+          path: "gallery",
+          element: <Gallery />,
+          children: [{ path: ":genre", element: <GenreGrid /> }]
+        },
+        { path: "about", element: <About /> },
+        { path: "contact", element: <Contact /> }
       ]
     }
   ]);

@@ -1,0 +1,12 @@
+.gallery-container {
+  display: flex;
+  align-items: flex-start;
+  padding: 2rem;
+  gap: 1rem; /* space between sidebar and grid */
+}
+
+.gallery-content {
+  flex: 1;
+  padding-left: 1rem; /* adds spacing from sidebar */
+  padding-right: 1rem; /* optional: keeps grid away from screen edge */
+}

@@ -8,6 +8,7 @@
   top: 0;
   left: 0;
   width: 100%;
+  /* */
   background-color: black; /* Fixed black background */
   z-index: 999;
 }
@@ -58,7 +59,7 @@
 
 /* Animated underline effect */
 .navbar ul li a::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 0;
   height: 2px;

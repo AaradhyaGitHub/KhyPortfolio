@@ -1,0 +1,63 @@
+.galleryNav {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: auto;
+  gap: 20px;
+  width: 10%;
+  margin: 0;
+  background-color: rgb(253, 253, 253);
+  margin-top: 4%;
+  margin-bottom: 5%;
+  box-sizing: border-box; /* ensures padding doesn't add extra width */
+}
+
+.galleryNav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  grid-column: 1 / 3; /* Position in the first two columns of the grid */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.galleryNav li {
+  padding: 5px 0;
+}
+
+.genre {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  letter-spacing: 1px;
+  position: relative;
+  padding: 5px 0;
+  transition: color 0.3s ease;
+}
+
+.genre:hover {
+  color: #000;
+}
+
+/* Underline animation effect */
+.genre::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #000;
+  transition: width 0.3s ease;
+}
+
+.genre:hover::after,
+.active::after {
+  width: 100%;
+}
+
+/* Style for active link */
+.active {
+  font-weight: 700;
+  color: #000;
+}

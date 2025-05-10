@@ -1,0 +1,152 @@
+.container {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.masonryGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+  gap: 24px;
+  padding: 24px;
+  background-color: rgba(253, 253, 253, 0.467);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  height: calc(100vh - 160px);
+  overflow: hidden;
+  margin: 40px 0;
+}
+
+.masonryColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: scrollUpSlow 80s linear infinite;
+  will-change: transform;
+}
+
+/* Stagger the animation for each column to create a more natural flow */
+.masonryColumn:nth-child(1) {
+  animation-duration: 90s;
+}
+
+.masonryColumn:nth-child(2) {
+  animation-duration: 100s;
+  animation-delay: -15s;
+}
+
+.masonryColumn:nth-child(3) {
+  animation-duration: 95s;
+  animation-delay: -30s;
+}
+
+.masonryColumn:nth-child(4) {
+  animation-duration: 85s;
+  animation-delay: -10s;
+}
+
+@keyframes scrollUpSlow {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+/* Pause animation on hover */
+.masonryGrid:hover .masonryColumn {
+  animation-play-state: paused;
+}
+
+.imageWrapper {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.imageWrapper:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.photoGenreTag {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  color: white;
+  padding: 16px 12px 8px;
+  font-size: 0.9rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  text-transform: capitalize;
+}
+
+.imageWrapper:hover .photoGenreTag {
+  opacity: 1;
+}
+
+.noPhotos {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 40px;
+  color: #666;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .masonryGrid {
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .masonryColumn {
+    gap: 18px;
+  }
+}
+
+@media (max-width: 900px) {
+  .masonryGrid {
+    gap: 16px;
+    padding: 16px;
+    height: calc(100vh - 120px);
+  }
+
+  .masonryColumn {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .masonryGrid {
+    gap: 14px;
+    padding: 14px;
+    height: calc(100vh - 100px);
+  }
+
+  .masonryColumn {
+    gap: 14px;
+  }
+
+  .container {
+    padding: 0 12px;
+  }
+}
