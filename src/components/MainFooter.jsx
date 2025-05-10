@@ -78,7 +78,9 @@ const MainFooter = () => {
 
         <div className={styles.credits}>
           <a
-            href="https://example.com"
+            href="https://linkedin.com/in/aaradhya-poudyal-202020/"
+            target="_blank" // This opens the link in a new tab
+            rel="noopener noreferrer" // This is a security best practice when using target="_blank"
             className={styles.creditLink}
             onMouseEnter={() => setHover("credit")}
             onMouseLeave={() => setHover("")}
