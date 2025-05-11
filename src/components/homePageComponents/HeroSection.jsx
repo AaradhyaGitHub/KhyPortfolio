@@ -6,7 +6,7 @@ export default function HeroSection() {
 
   return (
     <main className={styles.heroContainer}>
-      <img src={heroImg} alt="Downtown Sacramento Skyline" loading="lazy" />
+      <img src={heroImg} alt="Downtown Sacramento Skyline" />
       <div className={styles.heroText}>
         <h1>Khy Rodriguez</h1>
         <p>Filmmaker | Photographer</p>

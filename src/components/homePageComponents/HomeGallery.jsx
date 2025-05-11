@@ -58,7 +58,7 @@ export default function HomeGallery() {
       {galleryItems.map((item) => (
         <div key={item.id} className={item.className}>
           <div className={styles.imageContainer}>
-            <img src={item.image} alt={item.title} loading="lazy" />
+            <img src={item.image} alt={item.title} />
           </div>
           <div className={styles.textContainer}>
             <h3 className={styles.itemTitle}>{item.title}</h3>
