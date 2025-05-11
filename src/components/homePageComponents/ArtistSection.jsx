@@ -2,17 +2,23 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./ArtistSection.module.css";
 
-// Import the images
-
-import artistMain from "../../assets/Photos/Artist/hero2.jpg";
-import artistBackground from "../../assets/Photos/Artist/bgvert.jpg";
-
-import portraitPic from "../../assets/Photos/Portrait/portrait4.jpg";
-import streetPic from "../../assets/Photos/Landscape/land1.jpg";
-import fashionPic from "../../assets/Photos/Fashion/editorial12.jpg";
-import gradPic from "../../assets/Photos/Grad/grad4.jpg";
-
 export default function ArtistSection() {
+  // Using graduation images as placeholders for artist images
+  const artistMain =
+    "https://res.cloudinary.com/de3cxnkuw/image/upload/f_auto,q_auto/v1746951506/grad1_on6zll.jpg";
+  const artistBackground =
+    "https://res.cloudinary.com/de3cxnkuw/image/upload/f_auto,q_auto/v1746951509/grad2_bsdoza.jpg";
+
+  // Other photos from your gallery
+  const portraitPic =
+    "https://res.cloudinary.com/de3cxnkuw/image/upload/f_auto,q_auto/v1746950634/portrait4_osypd2.jpg";
+  const streetPic =
+    "https://res.cloudinary.com/de3cxnkuw/image/upload/f_auto,q_auto/v1746950189/land1_t2rsxu.jpg";
+  const fashionPic =
+    "https://res.cloudinary.com/de3cxnkuw/image/upload/f_auto,q_auto/v1746951479/editorial12_gdzhqa.jpg";
+  const gradPic =
+    "https://res.cloudinary.com/de3cxnkuw/image/upload/f_auto,q_auto/v1746951514/grad4_xiwdf3.jpg";
+
   return (
     <div
       className={styles.artistSection}
@@ -25,7 +31,8 @@ export default function ArtistSection() {
           <h3>MEET THE ARTIST</h3>
           <h2>Khy Rodriguez</h2>
           <p>
-          Khy’s creativity knows no bounds—unlike his femurs, which gave up halfway."
+            Khy's creativity knows no bounds—unlike his femurs, which gave up
+            halfway.
           </p>
           <Link to="/about" className={styles.discoverButton}>
             Learn More
@@ -48,7 +55,6 @@ export default function ArtistSection() {
               style={{ backgroundImage: `url(${fashionPic})` }}
             ></div>
           </div>
-
           */}
 
           <div
@@ -67,8 +73,7 @@ export default function ArtistSection() {
               style={{ backgroundImage: `url(${streetPic})` }}
             ></div>
           </div>
-            
-            */}
+          */}
         </div>
       </div>
     </div>
