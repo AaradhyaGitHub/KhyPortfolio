@@ -3,6 +3,7 @@
   align-items: flex-start;
   padding: 2rem;
   gap: 1rem; /* space between sidebar and grid */
+  background-color: rgb(255, 255, 255);
 }
 
 .gallery-content {

@@ -7,74 +7,58 @@
   overflow: hidden;
 }
 
-.masonryGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+.slideshowContainer {
   width: 100%;
-  gap: 24px;
   padding: 24px;
-  background-color: rgba(253, 253, 253, 0.467);
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  background-color: rgb(255, 255, 255);
   height: calc(100vh - 160px);
   overflow: hidden;
   margin: 40px 0;
-}
-
-.masonryColumn {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-  animation: scrollUpSlow 80s linear infinite;
-  will-change: transform;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Stagger the animation for each column to create a more natural flow */
-.masonryColumn:nth-child(1) {
-  animation-duration: 90s;
-}
-
-.masonryColumn:nth-child(2) {
-  animation-duration: 100s;
-  animation-delay: -15s;
-}
-
-.masonryColumn:nth-child(3) {
-  animation-duration: 95s;
-  animation-delay: -30s;
-}
-
-.masonryColumn:nth-child(4) {
-  animation-duration: 85s;
-  animation-delay: -10s;
-}
-
-@keyframes scrollUpSlow {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-50%);
-  }
-}
-
-/* Pause animation on hover */
-.masonryGrid:hover .masonryColumn {
-  animation-play-state: paused;
+.imageContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .imageWrapper {
-  width: 100%;
   position: relative;
   overflow: hidden;
   border-radius: 6px;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  margin-bottom: 20px;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+  /* Dynamic sizing handled by portrait/landscape classes */
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* For landscape-oriented images */
+.imageWrapper.landscape {
+  width: auto;
+  height: auto;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+/* For portrait-oriented images */
+.imageWrapper.portrait {
+  width: auto;
+  height: auto;
+  max-width: 70%;
+  max-height: 90%;
 }
 
 .imageWrapper:hover {
-  transform: translateY(-5px) scale(1.03);
+  transform: scale(1.02);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
   z-index: 10;
 }
@@ -82,8 +66,9 @@
 .image {
   display: block;
   width: 100%;
-  height: auto;
-  object-fit: cover;
+  height: 100%;
+  object-fit: contain; /* This ensures image is never cropped */
+  max-height: calc(100vh - 250px);
 }
 
 .photoGenreTag {
@@ -113,37 +98,27 @@
 
 /* Responsive adjustments */
 @media (max-width: 1200px) {
-  .masonryGrid {
-    gap: 20px;
+  .slideshowContainer {
     padding: 20px;
-  }
-
-  .masonryColumn {
-    gap: 18px;
   }
 }
 
 @media (max-width: 900px) {
-  .masonryGrid {
-    gap: 16px;
+  .slideshowContainer {
     padding: 16px;
     height: calc(100vh - 120px);
   }
 
-  .masonryColumn {
-    gap: 16px;
+  .imageWrapper.landscape,
+  .imageWrapper.portrait {
+    max-width: 95%;
   }
 }
 
 @media (max-width: 600px) {
-  .masonryGrid {
-    gap: 14px;
+  .slideshowContainer {
     padding: 14px;
     height: calc(100vh - 100px);
-  }
-
-  .masonryColumn {
-    gap: 14px;
   }
 
   .container {

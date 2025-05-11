@@ -1,13 +1,19 @@
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { GALLERY } from "../data/gallery.js";
 import classes from "./AnimatedGallery.module.css";
 
-export default function AnimatedGallery() {
-  const [columns, setColumns] = useState(4);
-  const [allPhotos, setAllPhotos] = useState([]);
+export default function OptimizedGallery() {
+  // Configuration options
+  const PRELOAD_IMAGES = 3; // Number of images to preload
+  const SLIDE_DURATION = 5000; // Time each image stays visible (ms)
+  const FADE_DURATION = 1000; // Transition duration (ms)
 
-  // Prepare all photos for main gallery view
+  const [allPhotos, setAllPhotos] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const imageRefs = useRef([]);
+
+  // Prepare all photos for the slideshow
   useEffect(() => {
     // Create a flat array of all photos with genre info
     const allPhotosArray = GALLERY.flatMap((category) =>
@@ -19,87 +25,99 @@ export default function AnimatedGallery() {
 
     // Shuffle array for random display
     const shuffledPhotos = [...allPhotosArray].sort(() => Math.random() - 0.5);
-    setAllPhotos(shuffledPhotos);
+
+    // Limit the number of photos to improve performance (adjust as needed)
+    const limitedPhotos = shuffledPhotos.slice(0, 15);
+
+    setAllPhotos(limitedPhotos);
+
+    // Initialize imageRefs array
+    imageRefs.current = limitedPhotos.map(() => new Image());
   }, []);
 
-  // Responsive column adjustment based on screen width
+  // Preload images
   useEffect(() => {
-    const updateColumns = () => {
-      if (window.innerWidth > 1200) {
-        setColumns(4);
-      } else if (window.innerWidth > 900) {
-        setColumns(3);
-      } else if (window.innerWidth > 600) {
-        setColumns(2);
-      } else {
-        setColumns(1);
+    if (allPhotos.length === 0) return;
+
+    // Calculate which images to preload
+    const indicesToPreload = [];
+    for (let i = 1; i <= PRELOAD_IMAGES; i++) {
+      const index = (currentIndex + i) % allPhotos.length;
+      indicesToPreload.push(index);
+    }
+
+    // Preload images
+    indicesToPreload.forEach((index) => {
+      if (imageRefs.current[index]) {
+        imageRefs.current[index].src = allPhotos[index].url;
       }
-    };
-
-    updateColumns();
-    window.addEventListener("resize", updateColumns);
-    return () => window.removeEventListener("resize", updateColumns);
-  }, []);
-
-  // Distribute images across columns for masonry layout
-  const distributePhotos = () => {
-    const columnArrays = Array.from({ length: columns }, () => []);
-
-    allPhotos.forEach((photo) => {
-      // Add photo to the column with the least content
-      const shortestColIndex = columnArrays
-        .map((column, i) => ({
-          height: column.reduce((acc) => acc + 1, 0),
-          index: i
-        }))
-        .sort((a, b) => a.height - b.height)[0].index;
-
-      columnArrays[shortestColIndex].push(photo);
     });
+  }, [currentIndex, allPhotos]);
 
-    return columnArrays;
+  // Auto-advance slideshow
+  useEffect(() => {
+    if (allPhotos.length === 0) return;
+
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % allPhotos.length);
+    }, SLIDE_DURATION);
+
+    return () => clearInterval(interval);
+  }, [allPhotos.length]);
+
+  // Get current image
+  const getCurrentImage = () => {
+    if (allPhotos.length === 0) return null;
+    return allPhotos[currentIndex];
   };
 
-  const photoColumns = distributePhotos();
-
-  // For the main gallery animation, we double the elements to create a seamless loop
-  const createLoopedColumns = (columns) => {
-    return columns.map((column) => [...column, ...column]);
-  };
-
-  const loopedColumns = createLoopedColumns(photoColumns);
+  const currentPhoto = getCurrentImage();
 
   return (
     <div className={classes.container}>
       {allPhotos.length > 0 ? (
-        <div
-          className={classes.masonryGrid}
-          style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
-        >
-          {loopedColumns.map((column, colIndex) => (
-            <div key={`column-${colIndex}`} className={classes.masonryColumn}>
-              {column.map((photo, photoIndex) => (
-                <motion.div
-                  key={`photo-${colIndex}-${photoIndex}`}
-                  className={classes.imageWrapper}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.5,
-                    delay: (photoIndex % (column.length / 2)) * 0.05
-                  }}
-                >
+        <div className={classes.slideshowContainer}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`photo-${currentIndex}`}
+              className={classes.imageContainer}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{
+                duration: FADE_DURATION / 1000
+              }}
+            >
+              {currentPhoto && (
+                <div className={classes.imageWrapper}>
                   <img
-                    src={photo.url}
-                    alt={`${photo.genre} photo`}
+                    src={currentPhoto.url}
+                    alt={`${currentPhoto.genre} photo`}
                     className={classes.image}
-                    loading="lazy"
+                    loading="eager"
+                    ref={(el) => {
+                      if (el) imageRefs.current[currentIndex] = el;
+                    }}
+                    onLoad={(e) => {
+                      // Check image orientation and adjust container class
+                      const img = e.target;
+                      const wrapper = img.parentElement;
+                      if (img.naturalWidth > img.naturalHeight) {
+                        wrapper.classList.add(classes.landscape);
+                        wrapper.classList.remove(classes.portrait);
+                      } else {
+                        wrapper.classList.add(classes.portrait);
+                        wrapper.classList.remove(classes.landscape);
+                      }
+                    }}
                   />
-                  <div className={classes.photoGenreTag}>{photo.genre}</div>
-                </motion.div>
-              ))}
-            </div>
-          ))}
+                  <div className={classes.photoGenreTag}>
+                    {currentPhoto.genre}
+                  </div>
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
         </div>
       ) : (
         <p className={classes.noPhotos}>Loading gallery...</p>
