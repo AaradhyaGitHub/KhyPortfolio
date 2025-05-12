@@ -1,6 +1,6 @@
 /* Global header styles */
 .header {
-  padding: 15px 0;
+  padding: 5px 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,9 +8,10 @@
   top: 0;
   left: 0;
   width: 100%;
-  /* */
-  background-color: black; /* Fixed black background */
+  background-color: rgba(255, 255, 255, 0.7); /* Light translucent background */
+  backdrop-filter: blur(10px); /* Elegant frosted glass effect */
   z-index: 999;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Soft divider line */
 }
 
 /* Navbar container */
@@ -18,7 +19,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  padding: 0 20px;
+  padding: 0 24px;
   box-sizing: border-box;
 }
 
@@ -28,9 +29,8 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  justify-content: center; /* Center items */
-  gap: 40px; /* Modern spacing between items */
-  width: 100%;
+  justify-content: center;
+  gap: 32px;
 }
 
 /* List item styling */
@@ -40,12 +40,12 @@
 
 /* Link styling */
 .navbar ul li a {
-  color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+  color: rgba(0, 0, 0, 0.8); /* Soft black */
   text-decoration: none;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
-  letter-spacing: 1px;
-  padding: 8px 5px;
+  letter-spacing: 0.5px;
+  padding: 6px 4px;
   display: inline-block;
   position: relative;
   transition: all 0.3s ease;
@@ -53,8 +53,8 @@
 
 /* Hover effect for links */
 .navbar ul li a:hover {
-  color: #ffffff;
-  transform: translateY(-2px); /* Slight lift on hover */
+  color: rgba(0, 0, 0, 0.95);
+  transform: translateY(-1px);
 }
 
 /* Animated underline effect */
@@ -62,25 +62,25 @@
   content: "";
   position: absolute;
   width: 0;
-  height: 2px;
+  height: 1.5px;
   bottom: 0;
   left: 0;
-  background-color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.85);
   transition: width 0.3s ease;
 }
 
 .navbar ul li a:hover::after {
-  width: 100%; /* Expand underline on hover */
+  width: 100%;
 }
 
 /* Active link styling */
 .navbar ul li a.active {
-  color: #ffffff;
+  color: rgba(0, 0, 0, 0.95);
 }
 
 .navbar ul li a.active::after {
-  width: 100%; /* Full underline for active link */
-  background-color: #ffffff;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
 }
 
 /* Responsive adjustments */
@@ -88,6 +88,10 @@
   .navbar ul {
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: 14px;
+  }
+
+  .header {
+    padding: 10px 0;
   }
 }
