@@ -19,12 +19,10 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  
 }
 
 .galleryNav li {
   padding: 5px 0;
-  
 }
 
 .genre {

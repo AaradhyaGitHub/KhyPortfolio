@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
 
 export default function MainNavigation() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   function toggleMenu() {
     setIsOpen((prev) => !prev);
@@ -12,9 +12,6 @@ export default function MainNavigation() {
   return (
     <header className={classes.header}>
       <nav className={classes.navbar}>
-        <button className={classes.toggle} onClick={toggleMenu}>
-          ☰
-        </button>
         <ul className={`${classes.navlist} ${isOpen ? classes.open : ""}`}>
           <li>
             <NavLink
@@ -22,6 +19,7 @@ export default function MainNavigation() {
               className={({ isActive }) =>
                 isActive ? classes.active : undefined
               }
+              end
             >
               Home
             </NavLink>
@@ -57,6 +55,11 @@ export default function MainNavigation() {
             </NavLink>
           </li>
         </ul>
+        <button className={classes.toggle} onClick={toggleMenu}>
+          <span
+            className={`${classes.arrow} ${isOpen ? classes.up : classes.down}`}
+          ></span>
+        </button>
       </nav>
     </header>
   );

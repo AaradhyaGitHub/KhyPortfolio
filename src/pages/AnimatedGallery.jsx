@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { GALLERY } from "../data/gallery.js";
 import classes from "./AnimatedGallery.module.css";
 
-export default function OptimizedGallery() {
+export default function AnimatedGallery() {
   // Configuration options
   const PRELOAD_IMAGES = 3; // Number of images to preload
   const SLIDE_DURATION = 5000; // Time each image stays visible (ms)
