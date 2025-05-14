@@ -1,66 +1,63 @@
-/* MainNavigation.module.css */
-
 /* Global header styles */
 .header {
-  padding: 5px 0; /* RESTORED: Original vertical padding. Horizontal padding is on .navbar for desktop. */
-  box-sizing: border-box;
+  padding: 5px 0;
   display: flex;
-  justify-content: center; /* RESTORED: Default for desktop to center the .navbar block */
+  justify-content: center;
   align-items: center;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-  z-index: 990; /* Base z-index for header */
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background-color: rgba(255, 255, 255, 0.7); /* Light translucent background */
+  backdrop-filter: blur(10px); /* Elegant frosted glass effect */
+  z-index: 999;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Soft divider line */
 }
 
-/* Navbar container - Styles for desktop, ensuring it's centered */
+/* Navbar container */
 .navbar {
   display: flex;
-  justify-content: center; /* Centers the <ul> within the .navbar block */
-  width: 100%; /* RESTORED: Ensures .navbar takes the necessary width within .header */
-  padding: 0 24px; /* RESTORED: Original horizontal padding inside .navbar, around the <ul> */
+  justify-content: center;
+  width: 100%;
+  padding: 0 24px;
   box-sizing: border-box;
 }
 
-/* List styling for the navbar - Original styles for desktop */
+/* List styling for the navbar */
 .navbar ul {
   display: flex;
   list-style: none;
   padding: 0;
   margin: 0;
-  justify-content: center; /* Ensures nav items are centered within the ul */
+  justify-content: center;
   gap: 32px;
 }
 
-/* List item styling - UNCHANGED from your original effective style */
+/* List item styling */
 .navbar ul li {
   position: relative;
 }
 
-/* Link styling - UNCHANGED from your original effective style */
+/* Link styling */
 .navbar ul li a {
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(0, 0, 0, 0.8); /* Soft black */
   text-decoration: none;
   font-size: 15px;
   font-weight: 500;
   letter-spacing: 0.5px;
-  padding: 6px 4px; /* Padding for the link text itself */
+  padding: 6px 4px;
   display: inline-block;
   position: relative;
   transition: all 0.3s ease;
 }
 
-/* Hover effect for links - UNCHANGED */
+/* Hover effect for links */
 .navbar ul li a:hover {
   color: rgba(0, 0, 0, 0.95);
   transform: translateY(-1px);
 }
 
-/* Animated underline effect - UNCHANGED */
+/* Animated underline effect */
 .navbar ul li a::after {
   content: "";
   position: absolute;
@@ -76,7 +73,7 @@
   width: 100%;
 }
 
-/* Active link styling - UNCHANGED */
+/* Active link styling */
 .navbar ul li a.active {
   color: rgba(0, 0, 0, 0.95);
 }
@@ -86,169 +83,49 @@
   background-color: rgba(0, 0, 0, 0.85);
 }
 
-/* --- STYLES FOR RESPONSIVE SIDEBAR (MOBILE) --- */
-/* These are largely the same as the previous version which correctly implemented the sidebar */
-
-/* Hamburger Button */
-.hamburgerButton {
-  display: none; /* Hidden on desktop */
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px; /* Clickable area */
-  z-index: 1001;
-  position: relative;
-  width: 40px;
-  height: 40px;
-}
-
-.hamburgerLine {
-  display: block;
-  width: 24px;
-  height: 2.5px;
-  background-color: rgba(0, 0, 0, 0.85);
-  margin: 5px auto;
-  transition: all 0.3s ease-in-out;
-  border-radius: 1px;
-}
-
-/* Hamburger animation to X */
-.hamburgerButton.hamburgerOpen .hamburgerLine:nth-child(1) {
-  transform: translateY(7.5px) rotate(45deg);
-}
-.hamburgerButton.hamburgerOpen .hamburgerLine:nth-child(2) {
-  opacity: 0;
-}
-.hamburgerButton.hamburgerOpen .hamburgerLine:nth-child(3) {
-  transform: translateY(-7.5px) rotate(-45deg);
-}
-
-/* Close button inside sidebar */
-.closeButton {
-  display: none; /* Initially hidden */
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  background: none;
-  border: none;
-  font-size: 32px;
-  font-weight: 300;
-  color: rgba(0, 0, 0, 0.8);
-  cursor: pointer;
-  z-index: 1005; /* Above sidebar content */
-  padding: 5px;
-  line-height: 1;
-}
-
-/* Overlay for background dimming */
-.overlay {
-  display: none; /* Hidden by default */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 995; /* Below sidebar, above page content */
-  opacity: 0; /* Start transparent */
-  transition: opacity 0.3s ease-in-out;
-}
-
-/* Responsive adjustments for screens up to 768px wide */
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  /* Modify header for mobile: align hamburger to right, potential logo to left */
+  .navbar ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
   .header {
-    justify-content: space-between;
-    padding: 5px 15px; /* Adjusted horizontal padding for mobile header */
+    padding: 10px 0;
   }
+}
 
-  /* Show hamburger button on mobile */
-  .hamburgerButton {
+.toggle {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+.navlist {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .toggle {
     display: block;
+    margin-left: auto;
   }
 
-  /* Transform .navbar into a sidebar for mobile */
-  .navbar {
-    /* Override desktop .navbar styles for sidebar functionality */
-    position: fixed;
-    top: 0;
-    right: -100%; /* Start off-screen */
-    width: 280px; /* Sidebar width */
-    max-width: 80vw; /* Max width for smaller phones */
-    height: 100vh; /* Full viewport height */
-    background-color: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(12px);
-    box-shadow: -4px 0px 20px rgba(0, 0, 0, 0.12);
-    z-index: 1000; /* Above overlay */
+  .navlist {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 1rem;
+  }
 
-    /* Layout for sidebar items */
+  .open {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: 80px 30px 30px; /* Specific padding for sidebar content, overrides desktop padding */
-    transition: right 0.35s cubic-bezier(0.23, 1, 0.32, 1); /* Smooth slide-in */
-  }
-
-  /* When mobile menu is open (.navbarOpen class is added) */
-  .navbar.navbarOpen {
-    right: 0; /* Slide sidebar in */
-  }
-
-  /* Style the UL within the sidebar */
-  /* Desktop .navbar ul styles are effectively overridden here due to .navbar.navbarOpen specificity or context */
-  .navbar.navbarOpen ul {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 18px;
-    width: 100%; /* UL takes full width of sidebar */
-    margin-top: 20px; /* Space below close button area */
-    /* justify-content: flex-start; -- Inherited from .navbar flex settings */
-  }
-
-  .navbar.navbarOpen ul li {
-    width: 100%;
-    margin: 0;
-  }
-
-  /* Adjust link styling for sidebar */
-  .navbar.navbarOpen ul li a {
-    font-size: 17px;
-    font-weight: 500;
-    padding: 12px 0; /* Larger vertical padding for touch targets */
-    width: 100%;
-    display: block; /* Make the entire area clickable */
-    color: rgba(0, 0, 0, 0.85);
-  }
-
-  .navbar.navbarOpen ul li a:hover {
-    color: rgba(0, 0, 0, 1);
-    transform: none; /* Optional: remove slight Y transform for mobile links */
-  }
-
-  .navbar.navbarOpen ul li a.active {
-    color: rgba(0, 0, 0, 1); /* Ensure active link is prominent */
-  }
-
-  /* Adjust underline for mobile links */
-  .navbar.navbarOpen ul li a::after {
-    bottom: 8px; /* Adjust underline position for new padding */
-    height: 2px;
-    background-color: rgba(0, 0, 0, 0.85);
-  }
-  .navbar.navbarOpen ul li a:hover::after,
-  .navbar.navbarOpen ul li a.active::after {
-    width: 60%; /* Or a fixed width, or keep 100% if preferred */
-  }
-
-  /* Show overlay when menu is open */
-  .overlay {
-    display: block;
-    opacity: 1; /* Make it visible */
-  }
-
-  /* Show close button when .navbarOpen is active (triggered by JS) */
-  .navbar.navbarOpen .closeButton {
-    display: block;
   }
 }
