@@ -26,39 +26,35 @@ export default function About() {
 
         {/* Content */}
         <article className={styles.content}>
+          {/* Vision Section */}
           <div className={styles.section}>
             <h2 className={styles.sectionTitle}>The Vision</h2>
             <p>
-              I am a visual poet who speaks through shadows and light. My camera
-              becomes an extension of perception, capturing those fleeting moments
-              when the world reveals its most authentic self. There's a particular
-              stillness I seek—that perfect balance where time seems suspended and
-              the landscape breathes with its own quiet rhythm.
+              Khy Rodriguez is a photographer and filmmaker driven by curiosity—a relentless desire to explore, experiment, and uncover the extraordinary in the everyday. 
             </p>
             <p>
-              Each image is a conversation between myself and the environment, 
-              a dialogue that often begins long before sunrise and continues 
-              well after the last light fades.
+              Every image he creates carries the depth of thoughtful observation, paired with a modern, inventive eye that transforms simple moments into compelling stories.
+            </p>
+            <p>
+              Whether capturing a fleeting glance, a sweeping landscape, or an intimate portrait, Khy approaches each frame with both patience and passion, ensuring that every story is told with authenticity and artistic flair.
             </p>
           </div>
 
+          {/* Approach Section */}
           <div className={styles.section}>
             <h2 className={styles.sectionTitle}>The Approach</h2>
             <p>
-              My work is rooted in patience and presence. I find myself drawn to the
-              overlooked corners of our natural world, those liminal spaces where
-              beauty emerges unexpectedly. The photographs I create are not mere
-              documentation but rather invitations—gentle beckoning to slow down, 
-              to notice, to wonder.
+              Known for his follow-through as much as his creativity, Khy brings both dedication and adaptability to every project. 
             </p>
             <p>
-              Through careful composition and an almost obsessive attention to the 
-              quality of light, I strive to distill complex emotional landscapes 
-              into visual form, creating images that resonate on a level beyond 
-              the merely aesthetic.
+              He listens, collaborates, and elevates the ideas of those he works with, while never losing sight of his own artistic vision. Working with him is both effortless and inspiring—he’s the kind of creative partner who encourages experimentation while delivering on the story you set out to tell.
+            </p>
+            <p>
+              His work is a balance of structure and spontaneity, where technical skill meets curiosity. From meticulously planned shots to impromptu adventures, Khy ensures each project captures a unique perspective, enriched with his signature creative touch.
             </p>
           </div>
 
+          {/* Signature Section */}
           <div className={styles.signature}>
             <svg
               viewBox="0 0 100 30"

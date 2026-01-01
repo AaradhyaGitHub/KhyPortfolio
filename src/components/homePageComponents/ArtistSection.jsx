@@ -71,18 +71,18 @@ export default function ArtistSection() {
             <h2 className={styles.name}>Khy Rodriguez</h2>
 
             <p className={styles.bio}>
-              A visual storyteller with an eye for the extraordinary in the
-              ordinary.
+              I’m a visual storyteller driven by curiosity and creative flair.
             </p>
 
             <p className={styles.bioExtended}>
-              Through the lens, every moment becomes a narrative waiting to be
-              told.
+              Through my lens, I turn simple moments into narratives that linger
+              and resonate.
             </p>
 
             <p className={styles.tagline}>
-              "Khy's creativity knows no bounds—unlike his femurs, which gave up
-              halfway."
+              I aim to bring your ideas to life, blending them with my
+              perspective to create images that are both authentic and
+              unforgettable.
             </p>
 
             <Link to="/about" className={styles.button}>
