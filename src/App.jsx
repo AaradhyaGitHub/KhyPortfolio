@@ -1,33 +1,30 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ThemeProvider } from "./context/ThemeContext";
 import RootLayout from "./pages/RootLayout";
 
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Gallery from "./pages/Gallery";
 import Home from "./pages/Home";
-import GenreGrid from "./components/galleryComponents/genreGrid";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: "gallery", element: <Gallery /> },
+      { path: "gallery/:genre", element: <Gallery /> },
+      { path: "about", element: <About /> },
+      { path: "contact", element: <Contact /> }
+    ]
+  }
+]);
 
 export default function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <RootLayout />,
-      children: [
-        { index: true, path: "", element: <Home /> },
-        {
-          path: "gallery",
-          element: <Gallery />,
-          children: [{ path: ":genre", element: <GenreGrid /> }]
-        },
-        { path: "about", element: <About /> },
-        { path: "contact", element: <Contact /> }
-        //test
-      ]
-    }
-  ]);
   return (
-    <>
+    <ThemeProvider>
       <RouterProvider router={router} />
-    </>
+    </ThemeProvider>
   );
 }
