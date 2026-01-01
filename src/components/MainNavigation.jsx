@@ -1,65 +1,119 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import classes from "./MainNavigation.module.css";
+import { useState, useEffect } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import { useTheme } from "../context/ThemeContext";
+import styles from "./MainNavigation.module.css";
+
+const navLinks = [
+  { to: "/", label: "Home", end: true },
+  { to: "/gallery", label: "Gallery" },
+  { to: "/about", label: "About" },
+  { to: "/contact", label: "Contact" }
+];
 
 export default function MainNavigation() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+  const location = useLocation();
 
-  function toggleMenu() {
-    setIsOpen((prev) => !prev);
-  }
+  // Close menu on route change
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
+
+  // Prevent scroll when menu is open
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   return (
-    <header className={classes.header}>
-      <nav className={classes.navbar}>
-        <ul className={`${classes.navlist} ${isOpen ? classes.open : ""}`}>
-          <li>
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                isActive ? classes.active : undefined
-              }
-              end
-            >
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/gallery"
-              className={({ isActive }) =>
-                isActive ? classes.active : undefined
-              }
-            >
-              Gallery
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/about"
-              className={({ isActive }) =>
-                isActive ? classes.active : undefined
-              }
-            >
-              About Me
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/contact"
-              className={({ isActive }) =>
-                isActive ? classes.active : undefined
-              }
-            >
-              Contact
-            </NavLink>
-          </li>
+    <header className={styles.header}>
+      <nav className={styles.nav}>
+        {/* Logo */}
+        <NavLink to="/" className={styles.logo}>
+          KR
+        </NavLink>
+
+        {/* Desktop Navigation */}
+        <ul className={styles.desktopNav}>
+          {navLinks.map(({ to, label, end }) => (
+            <li key={to}>
+              <NavLink
+                to={to}
+                end={end}
+                className={({ isActive }) =>
+                  `${styles.navLink} ${isActive ? styles.active : ""}`
+                }
+              >
+                {label}
+              </NavLink>
+            </li>
+          ))}
         </ul>
-        <button className={classes.toggle} onClick={toggleMenu}>
-          <span
-            className={`${classes.arrow} ${isOpen ? classes.up : classes.down}`}
-          ></span>
-        </button>
+
+        {/* Actions */}
+        <div className={styles.actions}>
+          {/* Theme Toggle */}
+          <button
+            onClick={toggleTheme}
+            className={styles.iconBtn}
+            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+          >
+            {theme === "dark" ? (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="5"/>
+                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+              </svg>
+            ) : (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+              </svg>
+            )}
+          </button>
+
+          {/* Hamburger Menu Button */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className={`${styles.iconBtn} ${styles.menuBtn}`}
+            aria-label="Toggle menu"
+            aria-expanded={isOpen}
+          >
+            {isOpen ? (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M18 6L6 18M6 6l12 12"/>
+              </svg>
+            ) : (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M3 12h18M3 6h18M3 18h18"/>
+              </svg>
+            )}
+          </button>
+        </div>
+
+        {/* Mobile Navigation Overlay */}
+        <div className={`${styles.mobileNav} ${isOpen ? styles.open : ""}`}>
+          <ul className={styles.mobileNavList}>
+            {navLinks.map(({ to, label, end }, index) => (
+              <li 
+                key={to}
+                style={{ animationDelay: `${index * 0.05 + 0.1}s` }}
+                className={styles.mobileNavItem}
+              >
+                <NavLink
+                  to={to}
+                  end={end}
+                  className={({ isActive }) =>
+                    `${styles.mobileNavLink} ${isActive ? styles.active : ""}`
+                  }
+                >
+                  {label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </div>
       </nav>
     </header>
   );
