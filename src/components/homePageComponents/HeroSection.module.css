@@ -1,37 +1,160 @@
-.heroContainer {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Background Image */
+.imageWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.85);
+  transition: transform 10s ease-out;
+}
+
+.hero:hover .heroImage {
+  transform: scale(1.02);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.1) 50%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+}
+
+/* Content */
+.content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: var(--spacing-md);
+}
+
+/* Name Animation */
+.name {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: var(--spacing-sm);
+}
+
+.firstName,
+.lastName {
+  display: block;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  line-height: 1;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.firstName {
+  font-size: clamp(3rem, 12vw, 7rem);
+}
+
+.lastName {
+  font-size: clamp(2rem, 8vw, 4.5rem);
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  transition-delay: 0.15s;
+}
+
+.content.visible .firstName,
+.content.visible .lastName {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Tagline */
+.tagline {
+  font-size: clamp(0.875rem, 2vw, 1.125rem);
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: var(--spacing-sm);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s;
+}
+
+.content.visible .tagline {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Scroll Indicator */
+.scrollIndicator {
+  position: absolute;
+  bottom: var(--spacing-lg);
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  animation: fadeInUp 0.8s ease 1s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+  }
+}
+
+.scrollLine {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0)
+  );
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scaleY(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1.1);
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .scrollIndicator {
+    bottom: var(--spacing-md);
   }
   
-  .heroContainer img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(70%);
+  .scrollLine {
+    height: 40px;
   }
-  
-  .heroText {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color:rgb(255, 255, 255) ;
-  }
-  
-  .heroText h1 {
-    font-size: 4rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-  
-  .heroText p {
-    font-size: 1.5rem;
-    font-weight: 300;
-    letter-spacing: 2px;
-    color:#d1cdcd ;
-  }
-  
+}

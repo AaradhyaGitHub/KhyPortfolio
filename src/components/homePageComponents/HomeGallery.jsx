@@ -1,73 +1,81 @@
 import { Link } from "react-router-dom";
 import styles from "./HomeGallery.module.css";
 
-export default function HomeGallery() {
-  const galleryItems = [
-    {
-      id: 1,
-      image:
-        "https://res.cloudinary.com/de3cxnkuw/image/upload/f_auto,q_auto/v1746950192/land7_gluzxy.jpg",
-      title: "LANDSCAPE",
-      path: "/gallery/landscape",
-      className: `${styles.galleryItem} ${styles.item1}`
-    },
-    {
-      id: 2,
-      image:
-        "https://res.cloudinary.com/de3cxnkuw/image/upload/f_auto,q_auto/v1746949601/art4_tncpov.jpg",
-      title: "ART",
-      path: "/gallery/art",
-      className: `${styles.galleryItem} ${styles.item2}`
-    },
-    {
-      id: 3,
-      image:
-        "https://res.cloudinary.com/de3cxnkuw/image/upload/f_auto,q_auto/v1746950634/portrait4_osypd2.jpg",
-      title: "PORTRAITS",
-      path: "/gallery/portraits",
-      className: `${styles.galleryItem} ${styles.item3}`
-    },
-    {
-      id: 4,
-      image:
-        "https://res.cloudinary.com/de3cxnkuw/image/upload/f_auto,q_auto/v1746950189/land1_t2rsxu.jpg",
-      title: "STREET",
-      path: "/gallery/street",
-      className: `${styles.galleryItem} ${styles.item4}`
-    },
-    {
-      id: 5,
-      image:
-        "https://res.cloudinary.com/de3cxnkuw/image/upload/f_auto,q_auto/v1746951479/editorial12_gdzhqa.jpg",
-      title: "FASHION",
-      path: "/gallery/fashion",
-      className: `${styles.galleryItem} ${styles.item5}`
-    },
-    {
-      id: 6,
-      image:
-        "https://res.cloudinary.com/de3cxnkuw/image/upload/f_auto,q_auto/v1746951514/grad4_xiwdf3.jpg",
-      title: "GRADUATION",
-      path: "/gallery/grad",
-      className: `${styles.galleryItem} ${styles.item6}`
-    }
-  ];
+const galleryItems = [
+  {
+    id: 1,
+    image: "https://res.cloudinary.com/de3cxnkuw/image/upload/f_auto,q_auto/v1746950192/land7_gluzxy.jpg",
+    title: "Landscape",
+    path: "/gallery/landscape"
+  },
+  {
+    id: 2,
+    image: "https://res.cloudinary.com/de3cxnkuw/image/upload/f_auto,q_auto/v1746949601/art4_tncpov.jpg",
+    title: "Art",
+    path: "/gallery/art"
+  },
+  {
+    id: 3,
+    image: "https://res.cloudinary.com/de3cxnkuw/image/upload/f_auto,q_auto/v1746950634/portrait4_osypd2.jpg",
+    title: "Portraits",
+    path: "/gallery/portrait"
+  },
+  {
+    id: 4,
+    image: "https://res.cloudinary.com/de3cxnkuw/image/upload/f_auto,q_auto/v1746950189/land1_t2rsxu.jpg",
+    title: "Street",
+    path: "/gallery/street"
+  },
+  {
+    id: 5,
+    image: "https://res.cloudinary.com/de3cxnkuw/image/upload/f_auto,q_auto/v1746951479/editorial12_gdzhqa.jpg",
+    title: "Fashion",
+    path: "/gallery/fashion"
+  },
+  {
+    id: 6,
+    image: "https://res.cloudinary.com/de3cxnkuw/image/upload/f_auto,q_auto/v1746951514/grad4_xiwdf3.jpg",
+    title: "Graduation",
+    path: "/gallery/graduation"
+  }
+];
 
+export default function HomeGallery() {
   return (
-    <div className={styles.gallery}>
-      {galleryItems.map((item) => (
-        <div key={item.id} className={item.className}>
-          <div className={styles.imageContainer}>
-            <img src={item.image} alt={item.title} />
-          </div>
-          <div className={styles.textContainer}>
-            <h3 className={styles.itemTitle}>{item.title}</h3>
-            <Link to={item.path} className={styles.seeMore}>
-              SEE MORE
+    <section className={styles.section}>
+      <div className={styles.container}>
+        <h2 className={styles.sectionTitle}>Portfolio</h2>
+        
+        <div className={styles.grid}>
+          {galleryItems.map((item, index) => (
+            <Link 
+              key={item.id} 
+              to={item.path} 
+              className={styles.item}
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <div className={styles.imageWrapper}>
+                <img 
+                  src={item.image} 
+                  alt={item.title}
+                  className={styles.image}
+                  loading="lazy"
+                />
+                <div className={styles.overlay} />
+              </div>
+              <div className={styles.content}>
+                <h3 className={styles.title}>{item.title}</h3>
+                <span className={styles.viewMore}>
+                  View Gallery
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </span>
+              </div>
             </Link>
-          </div>
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
+    </section>
   );
 }
