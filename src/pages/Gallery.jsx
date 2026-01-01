@@ -184,7 +184,7 @@ export default function Gallery() {
           </div>
         ) : (
           <div className={styles.noPhotos}>
-            <p>No photos available for this category.</p>
+            <p>Coming soon...</p>
           </div>
         )}
       </div>

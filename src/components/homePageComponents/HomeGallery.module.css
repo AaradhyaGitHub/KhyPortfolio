@@ -1,6 +1,14 @@
 .section {
-  padding: var(--spacing-xl) 0;
+  /* Mobile: tighter padding */
+  padding: var(--spacing-lg) 0;
   background: var(--bg-primary);
+}
+
+@media (min-width: 768px) {
+  .section {
+    /* Desktop: more breathing room */
+    padding: var(--spacing-xl) 0;
+  }
 }
 
 .container {
@@ -21,8 +29,15 @@
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-weight: 400;
   letter-spacing: 0.05em;
-  margin-bottom: var(--spacing-lg);
+  /* Mobile: tighter margin below title */
+  margin-bottom: var(--spacing-md);
   color: var(--text-primary);
+}
+
+@media (min-width: 768px) {
+  .sectionTitle {
+    margin-bottom: var(--spacing-lg);
+  }
 }
 
 /* Grid Layout */
@@ -111,10 +126,16 @@
   left: 0;
   right: 0;
   padding: var(--spacing-md);
-  color: white;
   z-index: 1;
 }
 
+/* ============================================
+   TEXT COLORS - LOCKED TO WHITE
+   These are intentionally hardcoded white 
+   because they sit on top of images with 
+   dark gradient overlay. Do not change to 
+   use CSS variables.
+   ============================================ */
 .title {
   font-family: var(--font-heading);
   font-size: clamp(1.25rem, 3vw, 1.5rem);
@@ -122,6 +143,8 @@
   letter-spacing: 0.02em;
   margin-bottom: var(--spacing-xs);
   transition: transform var(--transition-normal);
+  /* LOCKED WHITE - sits on dark image overlay */
+  color: #ffffff;
 }
 
 .item:hover .title {
@@ -136,6 +159,7 @@
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  /* LOCKED WHITE with opacity - sits on dark image overlay */
   color: rgba(255, 255, 255, 0.7);
   opacity: 0;
   transform: translateY(10px);

@@ -1,25 +1,259 @@
+/* ============================================
+   ARTIST SECTION
+   
+   MOBILE (< 768px): Card with text overlay
+   DESKTOP (>= 768px): Two-column layout
+   ============================================ */
+
 .section {
-  padding: var(--spacing-xl) 0;
+  padding: var(--spacing-lg) 0;
   background: var(--bg-secondary);
   transition: background var(--transition-normal);
+}
+
+/* ============================================
+   SECTION TITLE
+   Reduced spacing - tighter margins
+   ============================================ */
+.sectionTitle {
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  padding: 0 var(--spacing-sm);
+  /* Tighter margin below title */
+  margin-bottom: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+  .sectionTitle {
+    /* Hide on desktop - we show name in content instead */
+    display: none;
+  }
+}
+
+/* ============================================
+   MOBILE CARD LAYOUT
+   Only visible on mobile (< 768px)
+   ============================================ */
+.mobileCard {
+  display: block;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-sm);
+}
+
+@media (min-width: 768px) {
+  .mobileCard {
+    display: none;
+  }
+}
+
+/* Card container - 4:5 aspect ratio */
+.card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.cardImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Gradient overlay - darkens bottom 35% */
+.gradientOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 55%,
+    rgba(0, 0, 0, 0.4) 65%,
+    rgba(0, 0, 0, 0.75) 80%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+  pointer-events: none;
+}
+
+/* Card text content - positioned low on image */
+.cardContent {
+  position: absolute;
+  bottom: 50px; /* Space for button below */
+  left: 0;
+  right: 0;
+  padding: 0 var(--spacing-sm);
+  z-index: 2;
+}
+
+.cardName {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+  /* LOCKED WHITE - on dark gradient */
+  color: #ffffff;
+}
+
+.cardBio {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  /* LOCKED WHITE with transparency */
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 95%;
+}
+
+/* ============================================
+   SHINY BUTTON - Mobile only
+   
+   Theme-aware: switches colors on toggle
+   Smaller size, positioned at bottom right
+   ============================================ */
+.shinyButton {
+  position: absolute;
+  bottom: var(--spacing-sm);
+  right: var(--spacing-sm);
+  z-index: 3;
+  
+  /* Smaller button sizing */
+  padding: 1px 10px;
+  border-radius: var(--radius-full);
+  
+  /* Dark theme: light button */
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(240, 240, 240, 0.9) 50%,
+    rgba(220, 220, 220, 0.85) 100%
+  );
+  
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+  
+  transition: all 0.3s ease;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.shinyButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+}
+
+.buttonText {
+  position: relative;
+  z-index: 2;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  /* Dark theme: dark text on light button */
+  color: #1a1a1a;
+}
+
+/* Shine sweep effect */
+.buttonShine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  transition: left 0.4s ease;
+  pointer-events: none;
+}
+
+.shinyButton:hover .buttonShine {
+  left: 100%;
+}
+
+/* ============================================
+   LIGHT THEME - Dark button
+   ============================================ */
+[data-theme="light"] .shinyButton {
+  background: linear-gradient(
+    145deg,
+    rgba(50, 50, 50, 0.95) 0%,
+    rgba(30, 30, 30, 0.95) 50%,
+    rgba(20, 20, 20, 0.95) 100%
+  );
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="light"] .shinyButton:hover {
+  background: linear-gradient(
+    145deg,
+    rgba(70, 70, 70, 0.95) 0%,
+    rgba(45, 45, 45, 0.95) 50%,
+    rgba(30, 30, 30, 0.95) 100%
+  );
+}
+
+[data-theme="light"] .buttonText {
+  color: #ffffff;
+}
+
+[data-theme="light"] .buttonShine {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 50%,
+    transparent 100%
+  );
+}
+
+/* ============================================
+   DESKTOP LAYOUT
+   Two-column: image left, text right
+   Only visible on desktop (>= 768px)
+   ============================================ */
+.desktopLayout {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .desktopLayout {
+    display: block;
+  }
 }
 
 .container {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 var(--spacing-sm);
+  padding: 0 var(--spacing-md);
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-lg);
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-xl);
   align-items: center;
-}
-
-@media (min-width: 768px) {
-  .container {
-    padding: 0 var(--spacing-md);
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-xl);
-  }
 }
 
 @media (min-width: 1024px) {
@@ -28,7 +262,7 @@
   }
 }
 
-/* Image */
+/* Desktop image */
 .imageWrapper {
   display: flex;
   justify-content: center;
@@ -68,25 +302,9 @@
   transform: scale(1.03);
 }
 
-/* Content */
+/* Desktop content */
 .content {
-  text-align: center;
-}
-
-@media (min-width: 768px) {
-  .content {
-    text-align: left;
-  }
-}
-
-.label {
-  display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: var(--spacing-sm);
+  text-align: left;
 }
 
 .name {
@@ -99,17 +317,19 @@
 }
 
 .bio {
-  font-size: 1rem;
+  font-size: 1.1rem;
   line-height: 1.8;
   color: var(--text-secondary);
   margin-bottom: var(--spacing-sm);
   max-width: 500px;
 }
 
-@media (min-width: 768px) {
-  .bio {
-    font-size: 1.1rem;
-  }
+.bioExtended {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-sm);
+  max-width: 500px;
 }
 
 .tagline {
@@ -121,15 +341,7 @@
   max-width: 500px;
 }
 
-@media (max-width: 767px) {
-  .bio,
-  .tagline {
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-/* Button */
+/* Desktop button */
 .button {
   display: inline-flex;
   align-items: center;
@@ -152,6 +364,8 @@
 }
 
 .button svg {
+  width: 20px;
+  height: 20px;
   transition: transform var(--transition-fast);
 }
 

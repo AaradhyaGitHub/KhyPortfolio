@@ -16,28 +16,47 @@
   }
 }
 
-/* Header */
+/* ============================================
+   HEADER SECTION
+   Contains the main image and name/title
+   ============================================ */
 .header {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
 }
 
+/* ============================================
+   IMAGE WRAPPER
+   
+   LANDSCAPE ORIENTATION
+   
+   Mobile: 16:9 aspect ratio (widescreen)
+   Desktop: 21:9 aspect ratio (cinematic)
+   
+   To change aspect ratio:
+   - Edit the aspect-ratio property below
+   - Common ratios: 16/9, 21/9, 3/2, 4/3
+   ============================================ */
 .imageWrapper {
-  width: 200px;
-  height: 200px;
-  border-radius: var(--radius-full);
+  width: 100%;
+  max-width: 800px;
   overflow: hidden;
   margin-bottom: var(--spacing-md);
+  border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
+  
+  /* Mobile: 16:9 widescreen ratio */
+  aspect-ratio: 16 / 9;
 }
 
 @media (min-width: 768px) {
   .imageWrapper {
-    width: 250px;
-    height: 250px;
+    /* Desktop: Cinematic 21:9 ratio */
+    aspect-ratio: 21 / 9;
+    border-radius: var(--radius-lg);
   }
 }
 
@@ -49,9 +68,13 @@
 }
 
 .imageWrapper:hover .mainImage {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
+/* ============================================
+   HEADER CONTENT
+   Name and subtitle below image
+   ============================================ */
 .headerContent {
   max-width: 500px;
 }
@@ -81,7 +104,10 @@
   letter-spacing: 0.05em;
 }
 
-/* Content */
+/* ============================================
+   CONTENT SECTIONS
+   Bio text areas
+   ============================================ */
 .content {
   max-width: 700px;
   margin: 0 auto;
@@ -119,7 +145,10 @@
   margin-bottom: 0;
 }
 
-/* Signature */
+/* ============================================
+   SIGNATURE
+   Decorative element at bottom
+   ============================================ */
 .signature {
   display: flex;
   justify-content: center;

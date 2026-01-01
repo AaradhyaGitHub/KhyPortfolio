@@ -22,7 +22,7 @@ const galleryItems = [
   },
   {
     id: 4,
-    image: "https://res.cloudinary.com/de3cxnkuw/image/upload/f_auto,q_auto/v1746950189/land1_t2rsxu.jpg",
+    image: "https://res.cloudinary.com/de3cxnkuw/image/upload/v1746950187/land8_ivff4j.jpg",
     title: "Street",
     path: "/gallery/street"
   },

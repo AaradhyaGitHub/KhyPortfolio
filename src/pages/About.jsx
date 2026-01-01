@@ -2,7 +2,7 @@ import styles from "./About.module.css";
 
 export default function About() {
   const mainImage =
-    "https://res.cloudinary.com/de3cxnkuw/image/upload/f_auto,q_auto/v1746951506/grad1_on6zll.jpg";
+    "https://res.cloudinary.com/de3cxnkuw/image/upload/v1767263308/DSCF0190_fxkw6b.jpg";
 
   return (
     <div className={styles.about}>

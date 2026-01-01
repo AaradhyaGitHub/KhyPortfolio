@@ -1,6 +1,6 @@
 .gallery {
   min-height: calc(100vh - var(--nav-height));
-  padding-top: calc(var(--nav-height) + var(--spacing-sm));
+  padding-top: calc(var(--nav-height) - var(--spacing-sm));
   background: var(--bg-primary);
 }
 
@@ -9,9 +9,8 @@
   position: sticky;
   top: var(--nav-height);
   z-index: 100;
-  padding: var(--spacing-sm);
+  padding: 6px var(--spacing-xs);
   background: var(--bg-primary);
-  border-bottom: 1px solid var(--border-light);
 }
 
 @media (min-width: 768px) {
@@ -99,8 +98,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--spacing-md);
-  border-bottom: 1px solid var(--border-light);
+  padding: var(--spacing-sm);
 }
 
 .navTitle {
