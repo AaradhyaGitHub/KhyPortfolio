@@ -1,0 +1,136 @@
+.about {
+  min-height: 100vh;
+  padding-top: var(--nav-height);
+  background: var(--bg-primary);
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--spacing-lg) var(--spacing-sm);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: var(--spacing-xl) var(--spacing-md);
+  }
+}
+
+/* Header */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.imageWrapper {
+  width: 200px;
+  height: 200px;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: var(--spacing-md);
+  box-shadow: var(--shadow-lg);
+}
+
+@media (min-width: 768px) {
+  .imageWrapper {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+.mainImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.imageWrapper:hover .mainImage {
+  transform: scale(1.05);
+}
+
+.headerContent {
+  max-width: 500px;
+}
+
+.label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--spacing-xs);
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+}
+
+/* Content */
+.content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.section {
+  margin-bottom: var(--spacing-lg);
+}
+
+.sectionTitle {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-xs);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.content p {
+  font-size: 1rem;
+  line-height: 1.9;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+  .content p {
+    font-size: 1.1rem;
+  }
+}
+
+.content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Signature */
+.signature {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--border-light);
+}
+
+.signatureSvg {
+  width: 100px;
+  height: auto;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
